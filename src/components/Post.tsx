@@ -1,3 +1,4 @@
+import { Comment } from './Comment';
 import style from './Post.module.css';
 
 interface PostProps {
@@ -48,6 +49,12 @@ export function Post() {
           <button type="submit">Publicar</button>
         </footer>
       </form>
+
+      <div className={style.commentList}>
+        <Comment />
+        <Comment />
+        <Comment />
+      </div>
     </article>
   );
 }
