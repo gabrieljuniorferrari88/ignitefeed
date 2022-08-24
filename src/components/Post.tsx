@@ -20,6 +20,8 @@ interface PostProps {
 export function Post({ author, content, publishedAt }: PostProps) {
   const [comments, setComments] = useState(['Post muito bom! Parabéns']);
 
+  const [newCommentText, setNewCommentText] = useState('');
+
   const publishedDateFormatted = format(
     publishedAt,
     "dd 'de' LLL  'às' HH:mm'h'",
@@ -33,9 +35,22 @@ export function Post({ author, content, publishedAt }: PostProps) {
     addSuffix: true,
   });
 
-  function handleCreateNewComment() {
+  function handleCreateNewComment(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    setComments([...comments, comments.length + 1]);
+    setComments([...comments, newCommentText]);
+    setNewCommentText('');
+  }
+
+  function handleNewCommentChange() {
+    setNewCommentText(event.target.value);
+  }
+
+  function deleteComment(comment: string) {
+    const commentsWithoutDeletedOne = comments.filter((c) => {
+      return c !== comment;
+    });
+
+    setComments(commentsWithoutDeletedOne);
   }
 
   return (
@@ -74,7 +89,12 @@ export function Post({ author, content, publishedAt }: PostProps) {
       <form onSubmit={handleCreateNewComment} className={style.commentForm}>
         <strong>Deixe seu feedback</strong>
 
-        <textarea placeholder="Deixe um comentário" />
+        <textarea
+          placeholder="Deixe um comentário"
+          name="comment"
+          value={newCommentText}
+          onChange={handleNewCommentChange}
+        />
 
         <footer>
           <button type="submit">Publicar</button>
@@ -83,7 +103,13 @@ export function Post({ author, content, publishedAt }: PostProps) {
 
       <div className={style.commentList}>
         {comments.map((comment) => {
-          return <Comment content={comment} key={comment} />;
+          return (
+            <Comment
+              content={comment}
+              key={comment}
+              onDeleteComment={deleteComment}
+            />
+          );
         })}
       </div>
     </article>
