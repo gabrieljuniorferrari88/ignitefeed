@@ -97,7 +97,7 @@ export function Post({ author, content, publishedAt }: PostProps) {
         <strong>Deixe seu feedback</strong>
 
         <textarea
-          placeholder="Deixe um comentário"
+          placeholder="Deixe um comentário aqui"
           name="comment"
           value={newCommentText}
           onChange={handleNewCommentChange}
