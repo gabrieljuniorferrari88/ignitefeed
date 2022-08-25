@@ -5,7 +5,7 @@
 
 &#xa0;
 
-<a href="https://gofinances.netlify.com">Demo</a>
+<a href="https://ignitefeed-coral.vercel.app/">Demo</a>
 
 </div>
 
