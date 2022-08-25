@@ -7,13 +7,20 @@ import { Avatar } from './Avatar';
 import { Comment } from './Comment';
 import style from './Post.module.css';
 
+interface Author {
+  avatarUrl: string;
+  name: string;
+  role: string;
+}
+
+interface ContentProps {
+  type: string;
+  content: string;
+}
+
 interface PostProps {
-  author: {
-    avatarUrl: string;
-    name: string;
-    role: string;
-  };
-  content: { type: 'paragraph' | 'link'; content: string }[];
+  author: Author;
+  content: ContentProps[];
   publishedAt: Date;
 }
 
